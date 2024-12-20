@@ -1,0 +1,32 @@
+{
+  "name": "quem-e-quem",
+  "version": "1.0.0",
+  "description": "Sistema de busca de usuários",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx --watch src/server.ts",
+    "seed": "tsx --watch src/database/seed.ts"
+  },
+  "author": "anthony",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.0.1",
+    "@types/node": "^22.10.2",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "env": "^0.0.2",
+    "fastify": "^5.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^6.0.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7"
+  }
+}
