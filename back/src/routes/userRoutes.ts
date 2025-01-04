@@ -17,4 +17,5 @@ export default async (app: FastifyInstance) => {
   app.get<{ Params: { name: string } }>("/users/:name", getUserByName);
   app.get<{ Params: { id: string } }>("/users/by-id/:id", getUserById);
   app.put<{ Params: { id: string } }>("/users/:id", updateUser);
+  app.delete<{ Params: { id: string } }>("/users/:id", updateUser);
 };

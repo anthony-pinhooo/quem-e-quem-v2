@@ -11,9 +11,14 @@ export const getAllUsers = async (req: FastifyRequest, reply: FastifyReply) => {
       include: { unit: true, position: true },
     });
 
-    reply.send(users);
+    if (users.length === 0) {
+      reply.code(404).send({ error: "A lista não possui usuários" });
+      return;
+    } else {
+      reply.send(users);
+    }
   } catch (error) {
-    reply.code(500).send({ error: "Erro ao buscar usuários" });
+    reply.code(500).send({ error: "Erro ao buscar usuários", message: error });
   }
 };
 
@@ -141,5 +146,26 @@ export const updateUser = async (
     } else {
       reply.code(500).send({ erro: "Erro ao atualizar os dados usuário" });
     }
+  }
+};
+
+export const deleteUser = async (
+  req: FastifyRequest<{ Params: { id: string } }>,
+  reply: FastifyReply
+) => {
+  try {
+    const { id } = req.params;
+    const user = await prisma.user.delete({
+      where: { id },
+    });
+
+    if (!user) {
+      reply.code(404).send({ error: "Usuário nao encontrado" });
+      return;
+    }
+
+    reply.code(200).send({ message: "Usuário deletado com sucesso!" });
+  } catch (err) {
+    reply.code(500).send({ error: "Erro ao deletar usuário" });
   }
 };
